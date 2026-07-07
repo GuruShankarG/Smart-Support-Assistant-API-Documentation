@@ -1,0 +1,18 @@
+# MkDocs generated website
+site/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.env/
+
+# IDE files
+.vscode/
+.idea/
+
+# Windows files
+Thumbs.db
+.DS_Store

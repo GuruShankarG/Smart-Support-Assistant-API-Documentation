@@ -1,0 +1,131 @@
+site_name: Smart Support Assistant API Documentation
+site_description: Zendesk Smart Support Assistant API Documentation
+site_author: Guru Shankar G
+
+theme:
+  name: material
+
+  language: en
+
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.instant
+    - navigation.tracking
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.tabs.link
+
+  # Uncomment after adding images
+  # logo: images/logo.png
+  # favicon: images/favicon.png
+
+
+markdown_extensions:
+
+  - admonition
+  - tables
+
+  - toc:
+      permalink: true
+
+  - pymdownx.details
+
+  - pymdownx.highlight:
+      anchor_linenums: true
+
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+  - pymdownx.tabbed:
+      alternate_style: true
+
+  - pymdownx.emoji
+
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
+
+
+nav:
+
+  - Home:
+      - Overview: index.md
+
+
+  - Introduction:
+      - Introduction: guides/introduction.md
+      - System Overview: guides/system-overview.md
+      - Architecture: guides/architecture.md
+
+
+  - Authentication:
+      - Authentication Guide: apis/authentication.md
+
+
+  - API Reference:
+
+      - API Overview: apis/api-overview.md
+
+
+      - Tickets:
+          - Ticket APIs: apis/tickets/Ticket-APIs.md
+
+
+      - Users:
+          - User APIs: apis/users/User-APIs.md
+
+
+      - Organizations:
+          - Organization APIs: apis/organizations/Organization-APIs.md
+
+
+      - Search:
+          - Search APIs: apis/search/Search-APIs.md
+
+
+      - Views:
+          - View APIs: apis/views/View-APIs.md
+
+
+      - Macros:
+          - Macro APIs: apis/macros/Macro-APIs.md
+
+
+      - Triggers:
+          - Trigger APIs: apis/triggers/Trigger-APIs.md
+
+
+
+  - AI Workflow:
+
+      - AI Workflow Reference: ai/AI-Workflow.md
+
+
+
+  - Developer Guides:
+
+      - Postman Collection Guide: guides/postman-guide.md
+      - Error Handling: guides/error-handling.md
+      - Rate Limits: guides/rate-limits.md
+      - Best Practices: guides/best-practices.md
+
+
+
+  - Reference:
+
+      - HTTP Status Codes: reference/http-status-codes.md
+      - Glossary: reference/glossary.md
+      - FAQ: reference/faq.md
+
+
+
+  - Changelog:
+
+      - Changelog: reference/changelog.md

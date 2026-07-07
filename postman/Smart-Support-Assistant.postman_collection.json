@@ -1,0 +1,2177 @@
+{
+  "info": {
+    "_postman_id": "3ffc7f91-473a-411e-adc6-26a176c14c17",
+    "name": "Smart Support Assistant API Documentation",
+    "description": "API collection for Zendesk-based Smart Support Assistant system",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43175661",
+    "_collection_link": "https://go.postman.co/collection/43175661-3ffc7f91-473a-411e-adc6-26a176c14c17?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Verify Authentication",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v2/users/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Access Token / API Token Authentication",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/users/me.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "me.json"
+              ]
+            },
+            "description": "# Get Access Token / API Token Authentication\n\n## Overview\n\nThis request authenticates the Zendesk API using **API Token Authentication**. Zendesk uses **Basic Authentication**, where the username is the Zendesk email address followed by `/token`, and the password is the generated API token. This request also verifies that the authentication credentials are valid by retrieving the authenticated user's information.\n\n## HTTP Method\n\nGET\n\n## Endpoint\n\n``` http\n{{base_url}}/api/v2/users/me.json\n\n ```\n\n## Authentication\n\n**Type:** Basic Auth\n\n**Username:**\n\n``` text\n{{email}}/token\n\n ```\n\n**Password:**\n\n``` text\n{{api_token}}\n\n ```\n\n## Collection Variables\n\n| Variable | Description | Example |\n| --- | --- | --- |\n| `base_url` | Zendesk account URL | `https://company.zendesk.com` |\n| `email` | Zendesk administrator email | `admin@company.com` |\n| `api_token` | Zendesk API Token | `xxxxxxxxxxxxxxxxxxxxxxxx` |\n\n## Request Headers\n\n| Header | Value |\n| --- | --- |\n| Accept | application/json |\n| Content-Type | application/json |\n\n## Sample Request\n\n``` http\nGET {{base_url}}/api/v2/users/me.json\n\n ```\n\n## Success Response\n\n**Status Code:** `200 OK`\n\n``` json\n{\n  \"user\": {\n    \"id\": 123456789,\n    \"name\": \"John Doe\",\n    \"email\": \"admin@company.com\",\n    \"role\": \"admin\",\n    \"active\": true\n  }\n}\n\n ```\n\n## Error Response\n\n**Status Code:** `401 Unauthorized`\n\n``` json\n{\n  \"error\": \"Couldn't authenticate you\"\n}\n\n ```\n\n## Steps\n\n1. Generate an API Token from the Zendesk Admin Center.\n    \n2. Open this request in Postman.\n    \n3. Select **Authorization** → **Basic Auth**.\n    \n4. Enter `{{email}}/token` as the Username.\n    \n5. Enter `{{api_token}}` as the Password.\n    \n6. Click **Send**.\n    \n7. A **200 OK** response confirms successful authentication.\n    \n\n## Prerequisites\n\n- Zendesk account with API Token enabled.\n    \n- Valid administrator or agent account.\n    \n- Collection variables configured:\n    - `base_url`\n        \n    - `email`\n        \n    - `api_token`\n        \n\n## Notes\n\n- Keep your API token secure and never share it publicly.\n    \n- Store credentials using Postman Collection Variables or Environment Variables.\n    \n- Always use HTTPS for API requests.\n    \n- If the API token is regenerated, update the `api_token` variable before making requests."
+          },
+          "response": []
+        }
+      ],
+      "description": "Handles API authentication using Zendesk API token. Used to verify access and secure all API requests."
+    },
+    {
+      "name": "Tickets",
+      "item": [
+        {
+          "name": "Create Ticket",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ticket\": {\r\n    \"subject\": \"Unable to login\",\r\n    \"comment\": {\r\n      \"body\": \"Customer cannot login to the application.\"\r\n    },\r\n    \"priority\": \"high\",\r\n    \"type\": \"incident\"\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/tickets.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "tickets.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Ticket by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/tickets/1.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "tickets",
+                "1.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Tickets",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/tickets.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "tickets.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Ticket",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ticket\": {\r\n    \"priority\": \"urgent\",\r\n    \"status\": \"pending\"\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/tickets/2.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "tickets",
+                "2.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Ticket",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/tickets/2.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "tickets",
+                "2.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Ticket Comments",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/tickets/1/comments.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "tickets",
+                "1",
+                "comments.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Ticket Comment",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ticket\": {\r\n    \"comment\": {\r\n      \"body\": \"Thank you for contacting us. Our support team is currently investigating your issue.\",\r\n      \"public\": true\r\n    }\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/tickets/1.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "tickets",
+                "1.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Attachment",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/binary",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "file",
+              "file": {
+                "src": "postman-cloud:///1f176a4a-a3cc-4720-ac3a-60e253f58a06"
+              }
+            },
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/uploads.json?filename=sample.pdf",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "uploads.json"
+              ],
+              "query": [
+                {
+                  "key": "filename",
+                  "value": "sample.pdf",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Ticket Metrics",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/ticket_metrics/28471066605468.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "ticket_metrics",
+                "28471066605468.json"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get User by ID",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/users/28471045896860.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "28471045896860.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Users",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/users.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"user\": {\r\n    \"name\": \"ravi\",\r\n    \"email\": \"ravi@example.com\",\r\n    \"role\": \"end-user\"\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/users.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"user\": {\r\n    \"name\": \"Ravi prasad\"\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/users/28637092621084.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "28637092621084.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Users",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/users/search.json?query=Ravi Prasad",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "search.json"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "Ravi Prasad"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Organizations",
+      "item": [
+        {
+          "name": "Get Organization",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/organizations/28471046361500.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "organizations",
+                "28471046361500.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Organizations",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/organizations.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "organizations.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Organization",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"organization\": {\r\n    \"name\": \"ABC Company\"\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/organizations.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "organizations.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Organization",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"organization\": {\r\n    \"name\": \"Tech Solutions Pvt Ltd\",\r\n    \"notes\": \"Enterprise client updated\",\r\n    \"shared_tickets\": true\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/organizations/28638006035868.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "organizations",
+                "28638006035868.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Organizations",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/organizations/search.json?name=Tech Solutions Pvt Ltd",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "organizations",
+                "search.json"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Tech Solutions Pvt Ltd"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "item": [
+        {
+          "name": "Search Tickets",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/search.json?query=type:ticket%20status:open%20priority:high",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "search.json"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "type:ticket",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "query",
+                  "value": "type:ticket status:open",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "query",
+                  "value": "type:ticket login",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "query",
+                  "value": "type:ticket%20status:open%20priority:high"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Users",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/search.json?query=type:user",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "search.json"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "type:user"
+                },
+                {
+                  "key": "query",
+                  "value": "type:user email:ravi@example.com",
+                  "disabled": true
+                },
+                {
+                  "key": "query",
+                  "value": "type:user role:end-user",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Organizations",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/search.json?query=type:organization",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "search.json"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "type:organization",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Global Search",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/search.json?query=type:ticket login",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "search.json"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "type:ticket login"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Views",
+      "item": [
+        {
+          "name": "List Views",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/views.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "views.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get View",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/views/28471025429404.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "views",
+                "28471025429404.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Execute View",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/views/28471025429404/execute.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "views",
+                "28471025429404",
+                "execute.json"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Macros",
+      "item": [
+        {
+          "name": "List Macros",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/macros.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "macros.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Macro",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/macros/28471046373404.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "macros",
+                "28471046373404.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Apply Macro",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/tickets/1/macros/28471046373404/apply.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "tickets",
+                "1",
+                "macros",
+                "28471046373404",
+                "apply.json"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Triggers",
+      "item": [
+        {
+          "name": "List Triggers",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/triggers.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "triggers.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Trigger",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/triggers/28471025415196.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "triggers",
+                "28471025415196.json"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "AI Workflow Reference",
+      "item": [
+        {
+          "name": "Search Relevant Tickets",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/search.json?query=Unable to log in after password reset",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "search.json"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "Unable to log in after password reset"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Retrieve Ticket Details",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/tickets/1.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "tickets",
+                "1.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Retrieve Ticket Comments",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/tickets/1/comments.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "tickets",
+                "1",
+                "comments.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "AI Response Flow",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let jsonData = pm.response.json();\r",
+                  "\r",
+                  "if (jsonData.choices && jsonData.choices.length > 0) {\r",
+                  "\r",
+                  "    let text = jsonData.choices[0].message.content;\r",
+                  "\r",
+                  "    // CLEAN TEXT (VERY IMPORTANT for Zendesk)\r",
+                  "    text = text\r",
+                  "        .replace(/\\\\/g, \"\")\r",
+                  "        .replace(/\"/g, \"'\")\r",
+                  "        .replace(/\\n/g, \" \");\r",
+                  "\r",
+                  "    pm.environment.set(\"ai_response\", text);\r",
+                  "\r",
+                  "    console.log(\"AI RESPONSE STORED:\", text);\r",
+                  "\r",
+                  "} else {\r",
+                  "    console.log(\"ERROR:\", jsonData);\r",
+                  "    pm.environment.set(\"ai_response\", \"NO RESPONSE FROM AI\");\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{groqApiKey}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"model\": \"llama-3.3-70b-versatile\",\r\n  \"messages\": [\r\n    {\r\n      \"role\": \"system\",\r\n      \"content\": \"You are a helpful customer support assistant.\"\r\n    },\r\n    {\r\n      \"role\": \"user\",\r\n      \"content\": \"Customer issue: I reset my password but I still cannot log in. Generate a professional customer support reply.\"\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.groq.com/openai/v1/chat/completions",
+              "protocol": "https",
+              "host": [
+                "api",
+                "groq",
+                "com"
+              ],
+              "path": [
+                "openai",
+                "v1",
+                "chat",
+                "completions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post AI Response to Zendesk",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let jsonData = pm.response.json();\r",
+                  "\r",
+                  "console.log(\"FULL RESPONSE:\", jsonData);\r",
+                  "\r",
+                  "pm.environment.set(\"ai_response\", JSON.stringify(jsonData));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ticket\": {\r\n    \"comment\": {\r\n      \"body\": \"{{ai_response}}\",\r\n      \"public\": true\r\n    }\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/tickets/1.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "tickets",
+                "1.json"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Utilities",
+      "item": [
+        {
+          "name": "Error Response Examples",
+          "item": [
+            {
+              "name": "400 Bad Request",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"ticket\": {\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://own-48441.zendesk.com/api/v2/tickets.json",
+                  "protocol": "https",
+                  "host": [
+                    "own-48441",
+                    "zendesk",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "tickets.json"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "401 Unauthorized",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://own-48441.zendesk.com/api/v2/tickets.json",
+                  "protocol": "https",
+                  "host": [
+                    "own-48441",
+                    "zendesk",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "tickets.json"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "404 Not Found",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://own-48441.zendesk.com/api/v2/ticketssss.json",
+                  "protocol": "https",
+                  "host": [
+                    "own-48441",
+                    "zendesk",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "ticketssss.json"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "405 Method Not Allowed",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://own-48441.zendesk.com/api/v2/tickets.json",
+                  "protocol": "https",
+                  "host": [
+                    "own-48441",
+                    "zendesk",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "tickets.json"
+                  ]
+                },
+                "description": "405 Method Not Allowed\n\nIn this API (Zendesk), when an unsupported HTTP method is used on a valid endpoint,\nthe server may return 400 Bad Request instead of 405 Method Not Allowed.\n\nTest Result:\n- Attempted to use DELETE method on /api/v2/tickets.json\n- API returned 400 Bad Request\n\nResponse:\n{\n    \"error\": \"ParameterMissing\",\n    \"description\": \"Request is invalid or method not supported\"\n}"
+              },
+              "response": []
+            },
+            {
+              "name": "429 Too Many Requests",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://own-48441.zendesk.com/api/v2/users.json",
+                  "protocol": "https",
+                  "host": [
+                    "own-48441",
+                    "zendesk",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "users.json"
+                  ]
+                },
+                "description": "429 Too Many Requests\n\nThis response occurs when API rate limit is exceeded.\n\nTest Result:\n- Executed using Postman Runner with rapid requests\n- Cloudflare edge protection triggered the rate limit response\n\nStatus:\n429 Too Many Requests\n\nResponse Type:\ntext/html (Cloudflare challenge page)\n\nResponse Headers:\n- server: cloudflare\n- cf-ray: a1647922d9c87e73-MAA\n- content-type: text/html; charset=UTF-8"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Rate Limit Test",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/tickets.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "tickets.json"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{email}}/token",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{apiToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://own-48441.zendesk.com/api/v2/users/me.json",
+              "protocol": "https",
+              "host": [
+                "own-48441",
+                "zendesk",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "me.json"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "password",
+        "value": "{{apiToken}}",
+        "type": "string"
+      },
+      {
+        "key": "username",
+        "value": "{{email}}/token",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
