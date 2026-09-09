@@ -121,3 +121,4 @@ Follow these recommendations to keep your API credentials secure:
 
 After authentication is configured, proceed to the **[API Overview](api-overview.md)** to understand the available API categories and endpoints.
 
+ 

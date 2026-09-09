@@ -286,4 +286,4 @@ Applying a macro may automatically update:
 | Get Macro | GET | Retrieve a macro by ID |
 | Apply Macro | PUT | Apply a macro to a ticket |
 
----
+--- 

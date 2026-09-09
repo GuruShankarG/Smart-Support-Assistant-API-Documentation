@@ -198,4 +198,4 @@ Successful requests return:
 
 # Summary
 
-This Postman collection provides a structured way to test Zendesk APIs used by the Smart Support Assistant. By executing the requests in sequence, developers can simulate the AI workflow from searching tickets to generating AI-assisted responses.
+This Postman collection provides a structured way to test Zendesk APIs used by the Smart Support Assistant. By executing the requests in sequence, developers can simulate the AI workflow from searching tickets to generating AI-assisted responses. 

@@ -44,4 +44,4 @@ and this project follows [Semantic Versioning](https://semver.org/).
 
 ### [1.1.0]
 - Introduce interactive API documentation (Swagger / OpenAPI integration)
-- Add AI-powered API assistant guide
+- Add AI-powered API assistant guide 

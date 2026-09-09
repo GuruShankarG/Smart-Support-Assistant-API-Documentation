@@ -246,4 +246,4 @@ Wait and retry the request later.
 
 # Summary
 
-Understanding HTTP status codes helps developers identify the outcome of API requests, troubleshoot issues efficiently, and build reliable integrations with the Zendesk API.
+Understanding HTTP status codes helps developers identify the outcome of API requests, troubleshoot issues efficiently, and build reliable integrations with the Zendesk API. 

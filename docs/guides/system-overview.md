@@ -76,3 +76,4 @@ Using the Smart Support Assistant provides several advantages:
 ## Next Step
 
 The next document explains the overall system architecture and how the different components interact with each other.
+ 

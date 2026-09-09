@@ -171,4 +171,4 @@ type:ticket status:open priority:high
 - Maximum results per request: 100
 - Supports pagination
 - Search is case-insensitive
-```
+``` 

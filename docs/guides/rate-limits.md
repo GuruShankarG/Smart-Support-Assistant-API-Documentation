@@ -127,4 +127,4 @@ To improve performance and reduce the chance of hitting rate limits:
 
 # Summary
 
-Zendesk API rate limits help maintain reliable service for all users. The Smart Support Assistant should monitor rate limit headers, avoid excessive requests, and automatically retry requests after the recommended waiting period to ensure smooth and reliable API communication.
+Zendesk API rate limits help maintain reliable service for all users. The Smart Support Assistant should monitor rate limit headers, avoid excessive requests, and automatically retry requests after the recommended waiting period to ensure smooth and reliable API communication. 

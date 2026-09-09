@@ -210,4 +210,4 @@ A customer service platform used for managing support tickets and customer inter
 
 # Summary
 
-This glossary helps clarify important terms used throughout the Smart Support Assistant API documentation. It ensures consistency and improves understanding of API concepts and workflows.
+This glossary helps clarify important terms used throughout the Smart Support Assistant API documentation. It ensures consistency and improves understanding of API concepts and workflows. 

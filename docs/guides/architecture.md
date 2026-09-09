@@ -80,3 +80,4 @@ This architecture offers several benefits:
 ## Next Step
 
 The next document explains how authentication works using Zendesk API Tokens and how to securely access the Smart Support Assistant APIs.
+ 

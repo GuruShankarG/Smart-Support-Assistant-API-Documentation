@@ -142,4 +142,4 @@ Triggers help automate support workflows such as:
 - Sending notifications to users
 - Assigning tickets automatically
 - Updating ticket status based on conditions
-```
+``` 
